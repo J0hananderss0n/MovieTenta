@@ -15,7 +15,7 @@ namespace MovieLibraryTest
     public class MovieLibaryTests
     {
         [TestMethod]
-        public void RemoveDublicatesTEest()
+        public void RemoveDublicatesTest()
         {
             var firstList = new List<Movie>()
             {
@@ -95,82 +95,6 @@ namespace MovieLibraryTest
             Assert.AreEqual("Forrest Gump", moviesSorted.FirstOrDefault().title);
             Assert.AreNotEqual("Eva och Adam", moviesSorted.FirstOrDefault().title);
         }
-        [TestMethod]
-        public void GetMovieByIdTest()
-        {
-            var mock = new Mock<IMovieClient>();
-            mock.Setup(s => s.FetchMovies()).Returns(MockMovieResponse);
-            MovieService movieService = new MovieService(mock.Object);
-            var movie = movieService.GetMovieById("1");
-            Assert.IsNotNull(movie);
-            Assert.AreEqual("1", movie.id);
-
-        }
-        [TestMethod]
-        public void GetMovieTest()
-        {
-            var mock = new Mock<IMovieClient>();
-            mock.Setup(s => s.FetchMovies()).Returns(MockMovieResponse);
-            MovieService movieService = new MovieService(mock.Object);
-            var movie = movieService.GetMovies();
-            Assert.AreEqual(5, movie.Count());
-        }
-        [TestMethod]
-        public void GetMovieByIdnullTest()
-        {
-            var mock = new Mock<IMovieClient>();
-            mock.Setup(s => s.FetchMovies()).Returns(MockMovieResponse);
-            MovieService movieService = new MovieService(mock.Object);
-            var movie = movieService.GetMovieById("111");
-            Assert.IsNull(movie);
-        }
-        private MovieResponse MockMovieResponse()
-        {
-            return new MovieResponse
-            {
-                Movies = new List<Movie>()
-            {
-                new Movie
-                {
-                id = "1",
-                title = "Harry potter",
-                rated = "5"
-                },
-                new Movie
-                {
-                id = "2",
-                title = "Eva och Adam",
-                rated = "2"
-                },
-                new Movie
-                {
-                id = "3",
-                title = "Forrest GUmp",
-                rated = "10"
-                },
-            },
-                DetailedMovies = new List<DetailedMovie>()
-            {
-                new DetailedMovie
-                {
-                id = "1",
-                title = "Starwars",
-                imdbRating = "6"
-                },
-                new DetailedMovie
-                {
-                id = "2",
-                title = "Harry potter",
-                imdbRating = "2"
-                },
-                new DetailedMovie
-                {
-                id = "3",
-                title = "Grown ups",
-                imdbRating = "10"
-                }
-            }
-            };
-        }
+        
     }
 }
