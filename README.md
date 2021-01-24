@@ -1,32 +1,21 @@
-# Tentamen i Clean code och testbar kod
+Vad du valt att testa och varför? 
+- Du behöver lägga till enhetstest (inte ett integrations- eller end-to-end-test) som testar en metod. Förslagsvis en metod utan sidoeffekter. Gör även en kort beskrivning om varför det underlättar att testa en metod utan sidoeffekter. Denna text ska ha källhänvisningar (exempelvis till Clean code).
 
-- Datum: 2021-01-21
-- Program: C#-utvecklare
-- Lärare: David Sundelius
+Valde att göra ett test för att se så man inte fick tillbaka några filmer med samma dubbletter.
+Gjorde även ett test för att se så filmerna sorterades efter rating ordentligt. 
 
-## Introduktion
-Vi har ett system som idag läser en lista på filmer från en json-fil på internet (https://ithstenta2020.s3.eu-north-1.amazonaws.com/topp100.json). Den innehåller titel, id och IMDB-ranking på filerna. Tjänsten som vi utvecklar har två stycken endpoints:
-En som returnerar en lista på alla filmers titlar, ordnad efter ranking (stigande eller fallande)
-En som returnerar all information vi har om en specifik film utifrån dess id.
+två utav de testerna du efterfrågar är RemoveDublicatesTest() och SortMovieListTest(). Detta är test som är isolerade och testar bara en grej. Det underlättar att göra enhetstester på funktioner utan sidoeffekter pga att man vill inte ha långa test funktioner där det händer massor av saker. Man vill ha tester som är lättförståliga och som endast gör det som den test metoden heter.
 
-## Uppgift
-Din uppgift är nu att refaktorera programmet enligt de principer vi gått igenom i kursen. När uppgiften är färdig så ska programmet uppfylla följande egenskaper:
-Koden är läsbar och tydlig i enlighet med Clean code-principer.
-- Logiken i programmet, såsom sorteringen, är enhetstestad.
-- Programmet ska innehålla en rimlig nivå av felhantering, användaren ska få rimliga meddelanden om något är fel.
-- Programmet ska innehålla ett motiverat designmönster.
-- Koden ska inte innehålla buggen (något som avviker från beskrivningen ovan) som finns i programmet från början.
+källhänvisningar från https://enos.itcollege.ee/~jpoial/oop/naited/Clean%20Code.pdf
 
-Utöver detta ska du bygga ut programmet med en ny funktion. Detta är att läsa in data från ytterligare en endpoint (https://ithstenta2020.s3.eu-north-1.amazonaws.com/detailedMovies.json). Denna data ska slås ihop med datan vi redan har och kunna presenteras på samma sätt. Det ska inte förekomma dubbletter av filmer i listan och den ska gå att sortera på samma villkor.
 
-## Hjälpmedel
-Alla hjälpmedel är tillåtna: internet, böcker, egenskrivet material och tidigare labbar/annan kod är godkänt exempelvis. Det enda ni inte får göra är att kommunicera med en annan människa under tentans gång, det inkluderar bland annat fysiska personer, telefon och chat.
+Vilket/vilka designmönster har du valt, varför? Hade det gått att göra på ett annat sätt? 
 
-## Redovisning
-Källkoden ska vara pushad till ett eget publikt repository på GitHub. Ert fullständiga namn, samt en *kort* reflektion över dina arkitekturella val, såsom:
+Jag valde att lägga in singleton för httpclienten så att den skapas upp engång och sedan återanvänds under hela tiden. Att instansierar upp en ny httpclient för varje request kommer antalet sockets som är tillgängliga under tunga belastningar att tömmas. Detta kommer att resultera i SocketException-fel.
 
-- Vad du valt att testa och varför? Hade lite problem så hann aldrig göra några test
-- Vilket/vilka designmönster har du valt, varför? Hade det gått att göra på ett annat sätt? Satt och funderade på att lägga in Templet i GetMoviceService men hann inte.
-- Hur mycket valde du att optimera koden, varför är det en rimlig nivå för vårt program? tycker den är lätt läslig kod. Man vet vad varje metod gör.Hann aldrig göra ngon felhantering då jag fastnade förlänge vid att lägga till ratings i movie modellen. 
+det är svårt och dumt att arbeta proaktivt med design mönster. De ska ju inte användast för att, de ska användas för att lösa ett problem och i en sån här liten uppgift är det svårt att hitta designmönster som är applicerbara.
 
-ska finnas med i README.md i repots main-branch (master).
+
+Hur mycket valde du att optimera koden, varför är det en rimlig nivå för vårt program?
+
+Jag försökte få en lättläslig kod med lättförståeliga metod- och variabelnamn. Flyttade ut all logik till MovieService klassen från controllern så det bara var anrop kvar i controllern till servicsen. 
