@@ -10,31 +10,34 @@ using MovieLibrary.Services;
 
 namespace MovieLibrary.Controllers
 {
-
-
     [ApiController]
     [Route("[controller]")]
-    public class MovieController
+    public class MovieController : Controller
     {
-        static HttpClient client = new HttpClient();
-
+        private readonly IMovieService movieService;
+        public MovieController(IMovieService movieService)
+        {
+            this.movieService = movieService;
+        }        
         [HttpGet]
         [Route("/toplist")]
         public IEnumerable<Movie> Toplist(bool ascOrDesc = true)
         {
-            GetMoviceService v = new GetMoviceService();
-            return v.GetMovie(ascOrDesc);
-
+            var movies = movieService.GetMovies();
+            return movieService.SortMovies(ascOrDesc, movies);
         }
 
         [HttpGet]
-        [Route("/movieById")]
-        public Movie GetMovieById(string id, bool ascOrDesc = true)
+        [Route("/{id}")]
+        public IActionResult GetMovieById(string id)
         {
+            var movie = movieService.GetMovieById(id);  
 
-            GetMovieByIdService getMovieById = new GetMovieByIdService();
-            var MoveById = getMovieById.GetMovieById(id, ascOrDesc);
-            return MoveById;
+            if(movie == null)
+            {
+                return NotFound();
+            }
+            return Ok(movie);
         }
     }
 }

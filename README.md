@@ -25,8 +25,8 @@ Alla hjälpmedel är tillåtna: internet, böcker, egenskrivet material och tidi
 ## Redovisning
 Källkoden ska vara pushad till ett eget publikt repository på GitHub. Ert fullständiga namn, samt en *kort* reflektion över dina arkitekturella val, såsom:
 
-- Vad du valt att testa och varför?
-- Vilket/vilka designmönster har du valt, varför? Hade det gått att göra på ett annat sätt?
-- Hur mycket valde du att optimera koden, varför är det en rimlig nivå för vårt program?
+- Vad du valt att testa och varför? Hade lite problem så hann aldrig göra några test
+- Vilket/vilka designmönster har du valt, varför? Hade det gått att göra på ett annat sätt? Satt och funderade på att lägga in Templet i GetMoviceService men hann inte.
+- Hur mycket valde du att optimera koden, varför är det en rimlig nivå för vårt program? tycker den är lätt läslig kod. Man vet vad varje metod gör.Hann aldrig göra ngon felhantering då jag fastnade förlänge vid att lägga till ratings i movie modellen. 
 
 ska finnas med i README.md i repots main-branch (master).
