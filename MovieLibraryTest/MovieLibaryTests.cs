@@ -65,7 +65,6 @@ namespace MovieLibraryTest
             Assert.AreNotEqual(6, actual.Count());
         }
         [TestMethod]
-
         public void SortMovieListTest()
         {
             var movies = new List<Movie>()
@@ -95,6 +94,7 @@ namespace MovieLibraryTest
             Assert.AreEqual("Forrest Gump", moviesSorted.FirstOrDefault().title);
             Assert.AreNotEqual("Eva och Adam", moviesSorted.FirstOrDefault().title);
         }
+       
         
     }
 }
